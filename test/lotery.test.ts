@@ -7,7 +7,7 @@ describe("lotery", () => {
     let associations: ParticipantAssociation[];
     let lotery: Lotery;
 
-    beforeEach(
+    beforeAll(
         () => {
             participantsList = importParticipantsList("data/participants_test.yaml");
             lotery = new Lotery(participantsList);
@@ -35,5 +35,10 @@ describe("lotery", () => {
         participantsList.forEach(participant => {
             expect(associations.find(asso => asso.giver === participant)!.receiver).not.toBe(participant);
         })
+    })
+
+    test("associations have to be shuffled", () => {
+        const givers = associations.map(association => association.giver);
+        expect(givers.join('')).not.toBe(participantsList.join(''));
     })
 });

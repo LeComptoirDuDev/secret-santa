@@ -1,8 +1,12 @@
+import _ from 'lodash';
+
 export class Lotery {
     private participants: string[];
 
     constructor(participants: string[]) {
-        this.participants = participants;
+
+        this.participants = _.shuffle(participants);
+
     }
 
     getAssociatedParticipants(): ParticipantAssociation[] {
