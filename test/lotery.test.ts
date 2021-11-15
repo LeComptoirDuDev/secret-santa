@@ -33,7 +33,7 @@ describe("lotery", () => {
 
     test("participants should not be receiver and giver at the same time", () => {
         participantsList.forEach(participant => {
-            expect(associations.find(asso => asso.giver === participant).receiver).not.toBe(participant);
+            expect(associations.find(asso => asso.giver === participant)!.receiver).not.toBe(participant);
         })
     })
 });

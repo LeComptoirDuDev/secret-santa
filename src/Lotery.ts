@@ -6,16 +6,10 @@ export class Lotery {
     }
 
     getAssociatedParticipants(): ParticipantAssociation[] {
-        return [{
-            giver: '',
+        return this.participants.map(participant => ({
+            giver: participant,
             receiver: ''
-        }, {
-            giver: '',
-            receiver: ''
-        }, {
-            giver: '',
-            receiver: ''
-        }];
+        }));
     }
 }
 
