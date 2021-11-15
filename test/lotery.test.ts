@@ -9,7 +9,7 @@ describe("lotery", () => {
 
     beforeAll(
         () => {
-            participantsList = importParticipantsList("data/participants_test.yaml");
+            participantsList = importParticipantsList("test/data/participants_test.yaml");
             lotery = new Lotery(participantsList);
             associations = lotery.getAssociatedParticipants();
         }

@@ -5,7 +5,7 @@ describe("participants import", () => {
     let participantsList: string[];
 
     beforeEach(() => {
-        participantsList = importParticipantsList("data/participants_test.yaml");
+        participantsList = importParticipantsList("test/data/participants_test.yaml");
     })
 
     it("should exists", () => {
@@ -21,4 +21,9 @@ describe("participants import", () => {
     it("should send an error if file does not exist", () => {
         expect(() => importParticipantsList('toto.txt')).toThrow();
     })
+
+    it("should throw an error if empty participant list", () => {
+        expect(() => importParticipantsList('test/data/empty_participant_test.yaml')).toThrowError('This participants file is empty');
+    })
+
 })
