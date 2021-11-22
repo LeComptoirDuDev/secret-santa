@@ -45,16 +45,42 @@ describe("lotery", () => {
         expect(givers.join('')).not.toBe(participantsList.join(''));
     })
 
-    it("should save associations in file", () => {
-        const saveAssociations = jest.spyOn(lotery, 'saveAssociations');
-        const associations = lotery.associateParticipants();
-        expect(saveAssociations).toHaveBeenNthCalledWith(1, associations);
-        expect(fs.existsSync(associationsFilePath)).toBeTruthy();
+    describe("associations saving", () => {
+        afterAll(() => {
+            if (fs.existsSync(associationsFilePath)) {
+                fs.unlinkSync(associationsFilePath);
+            }
+        });
 
-        const savedAssociations = JSON.parse(fs.readFileSync(associationsFilePath).toString())
+        it("should save associations in file", () => {
+            const saveAssociations = jest.spyOn(lotery, 'saveAssociations');
+            const associations = lotery.associateParticipants();
+            expect(saveAssociations).toHaveBeenNthCalledWith(1, associations);
+            expect(fs.existsSync(associationsFilePath)).toBeTruthy();
 
-        expect(savedAssociations).toEqual(associations);
+            const savedAssociations = JSON.parse(fs.readFileSync(associationsFilePath).toString());
 
-        fs.unlinkSync(associationsFilePath);
+            expect(savedAssociations).toEqual(associations);
+        })
+
+        it("should restore associations from file", () => {
+            lotery = new Lotery(participantsList, 'test/data/example_associations_test.json');
+            const savedAssociations = lotery.readAssociations();
+            expect(
+                savedAssociations
+                    .find(association => association.giver === "Sylvain")!
+                    .receiver
+            ).toBe("Virgil");
+            expect(
+                savedAssociations
+                    .find(association => association.giver === "Virgil")!
+                    .receiver
+            ).toBe("Pierre");
+            expect(
+                savedAssociations
+                    .find(association => association.giver === "Pierre")!
+                    .receiver
+            ).toBe("Sylvain");
+        })
     })
 });

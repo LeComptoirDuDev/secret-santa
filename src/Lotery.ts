@@ -33,6 +33,11 @@ export class Lotery {
     saveAssociations(associations: ParticipantAssociation[]): void {
         fs.writeFileSync(this.associationsFilePath, JSON.stringify(associations))
     }
+
+    readAssociations(): ParticipantAssociation[] {
+        const associations: ParticipantAssociation[] = JSON.parse(fs.readFileSync(this.associationsFilePath).toString());
+        return associations
+    }
 }
 
 export interface ParticipantAssociation {
