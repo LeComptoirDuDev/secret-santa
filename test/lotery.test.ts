@@ -1,17 +1,20 @@
 import { ParticipantAssociation, Lotery } from "../src/Lotery"
 import { importParticipantsList } from "../src/ImportParticipantsList";
+import fs from "fs";
 
 describe("lotery", () => {
 
     let participantsList: string[];
     let associations: ParticipantAssociation[];
     let lotery: Lotery;
+    const associationsFilePath = 'test/data/associations_test.json';
+    const participantsListFilePath = 'test/data/participants_test.yaml';
 
     beforeAll(
         () => {
-            participantsList = importParticipantsList("test/data/participants_test.yaml");
-            lotery = new Lotery(participantsList);
-            associations = lotery.getAssociatedParticipants();
+            participantsList = importParticipantsList(participantsListFilePath);
+            lotery = new Lotery(participantsList, associationsFilePath);
+            associations = lotery.associateParticipants();
         }
     )
 
@@ -40,5 +43,18 @@ describe("lotery", () => {
     test("associations have to be shuffled", () => {
         const givers = associations.map(association => association.giver);
         expect(givers.join('')).not.toBe(participantsList.join(''));
+    })
+
+    it("should save associations in file", () => {
+        const saveAssociations = jest.spyOn(lotery, 'saveAssociations');
+        const associations = lotery.associateParticipants();
+        expect(saveAssociations).toHaveBeenNthCalledWith(1, associations);
+        expect(fs.existsSync(associationsFilePath)).toBeTruthy();
+
+        const savedAssociations = JSON.parse(fs.readFileSync(associationsFilePath).toString())
+
+        expect(savedAssociations).toEqual(associations);
+
+        fs.unlinkSync(associationsFilePath);
     })
 });
