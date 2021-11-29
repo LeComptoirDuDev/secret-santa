@@ -1,1 +1,5 @@
-[{"giver":"Sylvain","receiver":"Virgil"},{"giver":"Virgil","receiver":"Pierre"},{"giver":"Pierre","receiver":"Sylvain"}]
+[
+  { "giver": "Sylvain", "receiver": "Virgil" },
+  { "giver": "Virgil", "receiver": "Pierre" },
+  { "giver": "Pierre", "receiver": "Sylvain" }
+]
