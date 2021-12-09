@@ -36,6 +36,9 @@ initServer();
 
 app.get('/:giver', (req, res) => {
     let association = associations?.find(asso => asso.giver === req.params.giver)
+    if (!association) {
+        res.status(404).send("Ce nom n'a pas été trouvé :'(")
+    }
     res.send(`Coucou ${association?.giver}, tu fais un cadeau à ${association?.receiver}`)
 })
 
