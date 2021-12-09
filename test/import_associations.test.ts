@@ -19,6 +19,5 @@ describe("import associations", () => {
     it("should return associations array if saved associations in file", () => {
         let associations = importAssociations("test/data/example_associations_test.json");
         expect(associations).toEqual([{ "giver": "Sylvain", "receiver": "Virgil" }, { "giver": "Virgil", "receiver": "Pierre" }, { "giver": "Pierre", "receiver": "Sylvain" }])
-
     })
 })
