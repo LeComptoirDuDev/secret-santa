@@ -34,14 +34,17 @@ function getAssociations(): ParticipantAssociation[] | undefined {
 
 initServer();
 
-app.set('case sensitive routing', true);
+app.set('views', './views')
+app.set('view engine', 'pug');
+
+app.use(express.static('static'));
 
 app.get('/:giver', (req, res) => {
     let association = associations?.find(asso => req.params.giver.toLowerCase() === asso.giver.toLowerCase())
     if (!association) {
         res.status(404).send("Ce nom n'a pas été trouvé :'(")
     }
-    res.send(`Coucou ${association?.giver}, tu fais un cadeau à ${association?.receiver}`)
+    res.render('display', { ...association });
 })
 
 app.listen(3000)
