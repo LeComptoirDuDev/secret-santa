@@ -34,8 +34,10 @@ function getAssociations(): ParticipantAssociation[] | undefined {
 
 initServer();
 
+app.set('case sensitive routing', true);
+
 app.get('/:giver', (req, res) => {
-    let association = associations?.find(asso => asso.giver === req.params.giver)
+    let association = associations?.find(asso => req.params.giver.toLowerCase() === asso.giver.toLowerCase())
     if (!association) {
         res.status(404).send("Ce nom n'a pas été trouvé :'(")
     }
