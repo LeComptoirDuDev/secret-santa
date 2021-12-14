@@ -39,6 +39,10 @@ app.set('view engine', 'pug');
 
 app.use(express.static('static'));
 
+app.get('/', (req, res) => {
+    res.status(404).render("404");
+})
+
 app.get('/:giver', (req, res) => {
     let association = associations?.find(asso => req.params.giver.toLowerCase() === asso.giver.toLowerCase())
     if (!association) {
