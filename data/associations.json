@@ -1,0 +1,5 @@
+[
+  { "giver": "Virgil", "receiver": "Sylvain" },
+  { "giver": "Sylvain", "receiver": "Pierre" },
+  { "giver": "Pierre", "receiver": "Virgil" }
+]
