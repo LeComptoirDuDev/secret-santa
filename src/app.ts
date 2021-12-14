@@ -4,6 +4,8 @@ import { importAssociations } from './ImportAssociations';
 import { importParticipantsList } from './ImportParticipantsList';
 import { Lotery, ParticipantAssociation } from "./Lotery"
 
+const PORT = process.env.PORT || 5000
+
 const app = express();
 
 const filePathParticipants = "./data/participants.yaml";
@@ -51,4 +53,4 @@ app.get('/:giver', (req, res) => {
     res.render('display', { ...association });
 })
 
-app.listen(5000)
+app.listen(PORT)
