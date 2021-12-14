@@ -1,3 +1,12 @@
+@font-face {
+  font-family: "candy";
+  src: url("/Candcu__.ttf") format("truetype");
+}
+
+body {
+  font-size: 4em;
+}
+
 .container {
   position: fixed;
   top: 0;
@@ -5,20 +14,28 @@
   width: 100vw;
   height: 100vh;
   display: flex;
-  background: #ed213a; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to top,
-    #93291e,
-    #ed213a
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to top,
-    #93291e,
-    #ed213a
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to top, #93291e, #ed213a);
   color: white;
   justify-content: center;
   flex-direction: column;
   align-items: center;
   font-family: "Lobster", cursive;
+}
+
+.error {
+  flex-direction: row;
+  flex-wrap: wrap;
+  font-size: 40rem;
+  font-family: candy;
+}
+
+p {
+  margin: 0px;
+}
+
+p span {
+  background: linear-gradient(145deg, #f0f0f0, #cacaca);
+  color: #ed213a;
+  padding: 0.2em 0.4em;
+  border-radius: 0.2em;
 }

@@ -42,7 +42,7 @@ app.use(express.static('static'));
 app.get('/:giver', (req, res) => {
     let association = associations?.find(asso => req.params.giver.toLowerCase() === asso.giver.toLowerCase())
     if (!association) {
-        res.status(404).send("Ce nom n'a pas été trouvé :'(")
+        res.status(404).render("404");
     }
     res.render('display', { ...association });
 })
